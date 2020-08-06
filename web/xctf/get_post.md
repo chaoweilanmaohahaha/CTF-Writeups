@@ -9,7 +9,7 @@ http://220.249.52.133:50491/?a=1
 ![avatar](./picture/get_post_1.png)
 
 好嘛，这下得用工具了，上 burp。在 repeater 中进行以下设置：  
-''' html
+``` html
 POST /?a=1 HTTP/1.1  // 注意头部由 GET 变为 POST 了
 Host: 220.249.52.133:50491
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101 Firefox/68.0
@@ -24,7 +24,7 @@ Content-Length: 3
 Content-Type:application/x-www-form-urlencoded   // GET 转 POST 时需要加，必加
 
 b=2  // POST 的参数
-'''
+```
 即可得到答案：  
 ![avatar](./picture/get_post_2.png)
 
