@@ -9,12 +9,12 @@ http://220.249.52.133:40943
 好吧，按题目描述的思路来。去查了一下 Robots 协议。先去访问网站根目录下的 robots.txt 文件，看看有什么有用的信息。  
 http://220.249.52.133:40943/robots.txt  
 进入上述链接，发现有用的东西，如图所示：  
-![avatar](/picture/robots_1.png)
+![avatar](./picture/robots_1.png)
 
 flag 大概率在这个 php 文件中了，访问一下这个文件：  
 http://220.249.52.133:40943/f1ag_1s_h3re.php  
 轻松得到 flag：  
-
+![avatar](./picture/robots_2.png)
 
 ## 相关知识：  
 ### robots协议：  
