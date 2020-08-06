@@ -14,7 +14,7 @@ http://220.249.52.133:40943/robots.txt
 flag 大概率在这个 php 文件中了，访问一下这个文件：  
 http://220.249.52.133:40943/f1ag_1s_h3re.php  
 轻松得到 flag：  
-
+![avatar](./picture/robots_2.png)
 
 ## 相关知识：  
 ### robots协议：  
