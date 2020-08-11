@@ -2,6 +2,7 @@
 ## 题目描述
 小宁写了个ping功能,但没有写waf,X老师告诉她这是非常危险的，你知道为什么吗。  
 
+## 思路
 http://220.249.52.133:45317  
 点开链接，直接就是 ping ：  
 ![avatar](./picture/command_execution_1.png)  
