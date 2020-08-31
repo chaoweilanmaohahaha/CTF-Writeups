@@ -6,7 +6,7 @@
 5. %o：以八进制数形式输出整数。
 6. %u：以十进制数输出unsigned型数据(无符号数)。
 7. %e：以指数形式输出实数。
-8. Python其它进制转十进制：`int(数字，进制类型)`例如`int('0x11',16)。
+8. Python其它进制转十进制：`int(数字，进制类型)`例如`int('0x11',16)`，10进制转16进制`hex(10)`。
 9. `int main(int argc, char* argv[])`：argc是命令行总的参数个数，argv[ ]是argc个参数，其中第0个参数是程序的全名
 10. UPX脱壳：`upx.exe -d filename`
 11. `uncompyle6 -o pcat.py pcat.pyc`反编译pyc文件
