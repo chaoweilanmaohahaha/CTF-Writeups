@@ -31,7 +31,7 @@ http://220.249.52.133:31939/{{"".__class__.__mro__[2].__subclasses__()[40]("fl4g
 2. 用 python 获取系统权限  
 os.system 和 os.popen。前者返回退出状态码，后者以 file 形式返回输出内容。（https://blog.csdn.net/sxingming/article/details/52071514）  
 3. 用python 语句寻找文件  
-__class__ ：返回对象所属的类  
+\__class__ ：返回对象所属的类  
 __mro__：返回一个类所继承的基类元组（用于寻找基类）  
 __base__ ：返回该类所继承的基类（用于寻找基类）  
 __subclasses__ ： 每个新类都保留了子类的引用，这个方法返回一个类中仍然可用的引用的列表  
