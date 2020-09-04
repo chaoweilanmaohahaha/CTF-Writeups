@@ -19,3 +19,6 @@
 18. `fseek( )`：原型`int fseek(FILE * stream, long offset, int whence)`，参数offset 为根据参数whence 来移动读写位置的位移数。参数 whence 为下列其中一种:SEEK_SET 从距文件开头offset 位移量为新的读写位置；SEEK_CUR 以目前的读写位置往后增加offset 个位移量；SEEK_END 将读写位置指向文件尾后再增加offset 个位移量；当whence 值为SEEK_CUR 或SEEK_END 时, 参数offset 允许负值的出现。
 19. `db`单个字节，`dw`两个字节，`dd`四个字节。
 20. 查看数据堆栈时用`Hex View`比较。
+21. `__m128i _mm_load_si128(__m128i *p);`方法是取得后面参数地址128bit的值
+22. `void _mm_storeu_si128 (__m128i *p, __m128i a);`是将第二个参数的值放入第一个参数地址中
+23. 假设一个十六进制数0x12345678，大端的存储方式是：12,34,56,78，然后读取的时候也是从前往后读，小端的存储方式是：78,56,34,12，然后读取的时候是从后往前读取
