@@ -1,4 +1,7 @@
 # php的小tips
+## php的别名
+php2, php3, php4, php5, phps, pht, phtm, phtml  
+这些别名，尤其在绕过后缀过滤时用得到。  
 ## php内置协议
 ### php://file — 访问本地文件系统
 #### 说明
